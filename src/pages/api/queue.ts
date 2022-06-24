@@ -1,15 +1,20 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import Queue, { EnqueuOptions, queue } from "@serverlessq/nextjs";
+import { enqueue, EnqueueOptions } from "@serverlessq/nextjs";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const options: EnqueuOptions = {
+  console.log("All env variables", process.env);
+  console.log("NODE_ENV env variable", process.env.NODE_ENV);
+  console.log("VERCEL_URL env variable", process.env.VERCEL_URL);
+  console.log("VERCEL_ENV env variable", process.env.VERCEL_ENV);
+  console.log("VERCEL env variable", process.env.VERCEL);
+  const options: EnqueueOptions = {
     method: "GET",
-    target: "https://jsonplaceholder.typicode.com/users",
+    target: "https://mock.codes/200",
   };
-  const response = await queue.enqueue(options);
+  const response = await enqueue(options);
+
   res.status(200).json({ ...response });
 }

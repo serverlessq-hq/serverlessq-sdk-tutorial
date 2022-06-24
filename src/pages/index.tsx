@@ -10,36 +10,12 @@ const Spinner = () => (
 );
 const Home: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState();
 
   const doSomething = async () => {
     setIsLoading(true);
-    try {
-      // const response = await queue.enqueue({
-      //   method: "GET",
-      //   target: "https://jsonplaceholder.typicode.com/users",
-      // });
-      // const response = await fetch(
-      //   "https://api.serverlessq.com?id=91260faf-0141-42d6-b7cc-bc5e17d4d17b&target=https://jsonplaceholder.typicode.com/users",
-      //   {
-      //     method: "GET",
-      //     mode: "no-cors",
-      //     headers: {
-      //       Accept: "application/json",
-      //       "x-api-key":
-      //         "584e301985702975910b7678468a236d71ee6a895afca68237cb6023911a977b",
-      //     },
-      //   }
-      // );
-
-      const r = await fetch("/api/queue");
-      setResult(await r.json());
-    } catch (e: any) {
-      setResult(e);
-      console.log(e);
-    }
-
+    const r = await fetch("/api/queue");
     setIsLoading(false);
+    console.log(r);
   };
 
   return (
@@ -55,11 +31,6 @@ const Home: NextPage = () => {
           Execute Task
         </button>
       )}
-      {result ? (
-        <div>
-          <p className="text-lg">{JSON.stringify(result)}</p>
-        </div>
-      ) : undefined}
     </div>
   );
 };

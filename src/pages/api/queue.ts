@@ -5,11 +5,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const queue = new Queue("d408f449-9689-4a05-b786-621b95e28078");
+  const queueId = "7a7acfbe-a40a-4f0d-b897-64143448b43d";
+  const queue = new Queue(queueId);
+
+  console.log("All env variables are:", process.env);
 
   const options: EnqueueOptions = {
     method: "GET",
-    target: "https://mock.codes/200",
+    target: `https://${process.env.VERCEL_URL}/api/consumer`,
   };
 
   const response = await queue.enqueue(options);

@@ -27,7 +27,7 @@ const Home: NextPage = (props) => {
     setIsLoading(true);
     try {
       const r = await fetch("/api/enqueue");
-      setResult(await r.json());
+      console.log(r);
     } catch (e: any) {
       setResult(JSON.stringify(e));
     }

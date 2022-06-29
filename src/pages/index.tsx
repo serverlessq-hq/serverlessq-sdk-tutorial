@@ -36,6 +36,7 @@ const Home: NextPage = () => {
   };
 
   return (
+  <>
     <div className="flex justify-center items-center	 h-screen">
       {isLoading ? (
         <Spinner />
@@ -48,12 +49,9 @@ const Home: NextPage = () => {
           Execute Task
         </button>
       )}
-      {result ? (
-        <div>
-          <p className="text-lg">{JSON.stringify(result)}</p>
-        </div>
-      ) : undefined}
     </div>
+    {result}
+    </>
   );
 };
 

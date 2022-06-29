@@ -1,15 +1,12 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from "next";
-import Queue, { EnqueuOptions, queue } from "@serverlessq/nextjs";
+import { Queue } from '@serverlessq/nextjs'
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const options: EnqueuOptions = {
-    method: "GET",
-    target: "https://jsonplaceholder.typicode.com/users",
-  };
-  const response = await queue.enqueue(options);
-  res.status(200).json({ ...response });
+const doSomethingImportant = async () => {
+  return await (await fetch('https://mock.codes/200')).json()
 }
+
+// pages/api/queue
+export default Queue('vercel2', 'api/queue', async (req, res) => {
+  const result = await doSomethingImportant();
+  console.log('Queue Job', result);
+  res.send('finished')
+}, { retries: 1, urlToOverrideWhenRunningLocalhost: 'https://mock.codes/201'});

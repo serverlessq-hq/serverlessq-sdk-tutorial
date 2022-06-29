@@ -1,38 +1,31 @@
 import type { NextPage } from "next";
 import { useState } from "react";
+import queueTest from '../pages/api/queue'
 
+export const getServerSideProps = async () => {
+  const x = await queueTest.enqueue('GET')
+  console.log(x)
+  return {
+    props: {
+      ...x
+    }
+  }
+};
 const Spinner = () => (
   <div className="flex items-center justify-center space-x-2 animate-bounce">
     <div className="w-8 h-8 bg-blue-400 rounded-full"></div>
-    <div className="w-8 h-8 bg-green-400 rounded-full"></div>
+    <div className="w-8 h-8 bg-gsreen-400 rounded-full"></div>
     <div className="w-8 h-8 bg-black rounded-full"></div>
   </div>
 );
 const Home: NextPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState();
+  const [result, setResult] = useState<any>();
 
   const doSomething = async () => {
     setIsLoading(true);
     try {
-      // const response = await queue.enqueue({
-      //   method: "GET",
-      //   target: "https://jsonplaceholder.typicode.com/users",
-      // });
-      // const response = await fetch(
-      //   "https://api.serverlessq.com?id=91260faf-0141-42d6-b7cc-bc5e17d4d17b&target=https://jsonplaceholder.typicode.com/users",
-      //   {
-      //     method: "GET",
-      //     mode: "no-cors",
-      //     headers: {
-      //       Accept: "application/json",
-      //       "x-api-key":
-      //         "584e301985702975910b7678468a236d71ee6a895afca68237cb6023911a977b",
-      //     },
-      //   }
-      // );
-
-      const r = await fetch("/api/queue");
+      const r = await fetch("/api/enqueue");
       setResult(await r.json());
     } catch (e: any) {
       setResult(e);

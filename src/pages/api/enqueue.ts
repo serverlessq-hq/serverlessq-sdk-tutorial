@@ -1,11 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import testQueue from './queue';
+import testQueue from "./queue";
 
-export default async function enqueue(req: NextApiRequest, res: NextApiResponse) {
-    const result = await testQueue.enqueue('GET');
-
-    if(result.message === 'OK') {
-        res.send('OK')
-    }
-    res.send('NOT OK')
+export default async function enqueue(
+  _req: NextApiRequest,
+  res: NextApiResponse
+) {
+  try {
+    const result = await testQueue.enqueue("GET");
+    res.json({ status: "success", ...result });
+  } catch (e) {
+    res.json({ status: "failed" });
+  }
 }

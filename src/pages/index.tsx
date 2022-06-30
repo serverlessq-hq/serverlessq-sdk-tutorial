@@ -14,7 +14,7 @@ export const getServerSideProps = async () => {
 const Spinner = () => (
   <div className="flex items-center justify-center space-x-2 animate-bounce">
     <div className="w-8 h-8 bg-blue-400 rounded-full"></div>
-    <div className="w-8 h-8 bg-gsreen-400 rounded-full"></div>
+    <div className="w-8 h-8 bg-green-400 rounded-full"></div>
     <div className="w-8 h-8 bg-black rounded-full"></div>
   </div>
 );
@@ -27,8 +27,11 @@ const Home: NextPage = (props) => {
     setIsLoading(true);
     try {
       const r = await fetch("/api/enqueue");
-      console.log(r);
+      const data = await r.json();
+      console.log(data);
+      setResult(data);
     } catch (e: any) {
+      console.log(e);
       setResult(JSON.stringify(e));
     }
     setIsLoading(false);

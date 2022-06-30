@@ -7,7 +7,7 @@ export default async function enqueue(
 ) {
   try {
     const result = await testQueue.enqueue("GET");
-    res.json({ status: "success", ...result });
+    res.json({ ...result });
   } catch (e) {
     res.json({ status: "failed" });
   }

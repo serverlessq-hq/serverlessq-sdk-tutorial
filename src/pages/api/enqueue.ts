@@ -6,9 +6,10 @@ export default async function enqueue(
   res: NextApiResponse
 ) {
   try {
-    const result = await testQueue.enqueue("GET");
+    const result = await testQueue.enqueue({ method: "GET" });
     res.json({ ...result });
   } catch (e) {
+    console.log("error", e);
     res.json({ status: "failed" });
   }
 }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import queueTest from "../pages/api/queue";
 
 export const getServerSideProps = async () => {
-  const result = await queueTest.enqueue("GET");
+  const result = await queueTest.enqueue({ method: "GET" });
   console.log(result);
   return {
     props: {

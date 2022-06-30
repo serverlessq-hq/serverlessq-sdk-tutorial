@@ -191,10 +191,6 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.1.3.tgz#6801033be7ff87a6b7cadaf5b337c9f366a3c4b0"
   integrity sha512-WiBSI6JBIhC6LRIsB2Kwh8DsGTlbBU+mLRxJmAe3LjHTdkDpwIbEOZgoXBbZilk/vlfjK8i6nKRAvIRn1XaIMw==
 
-"@serverlessq/nextjs@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@serverlessq/nextjs/-/nextjs-1.0.2.tgz#f830b17d8fc4c3eb07ad32efa1b04e55f6aef179"
-  integrity sha512-DsmS76AJnoPHfdcLFNAKcH7u94gZTUHtgNjyXa3wZONhRcNMghD2LDJn6IL63LauMLBP76mL+xQQg1Sn3BmvSA==
   dependencies:
     axios "^0.27.2"
 

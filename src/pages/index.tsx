@@ -1,14 +1,11 @@
 import type { NextPage } from "next";
 import { useState } from "react";
-import queueTest from "../pages/api/queue";
+import queue from "../pages/api/queue";
 
 export const getServerSideProps = async () => {
-  const result = await queueTest.enqueue({ method: "GET" });
-  console.log(result);
+  const result = await queue.enqueue({ method: "GET" });
   return {
-    props: {
-      ...result,
-    },
+    props: { ...result },
   };
 };
 const Spinner = () => (

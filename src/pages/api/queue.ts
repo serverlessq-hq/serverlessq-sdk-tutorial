@@ -18,6 +18,7 @@ export default Queue(
         code: `invalid_signature`,
         error: `signature didn't match`,
       });
+      return;
     }
     await doSomethingImportant();
     res.send("finished");

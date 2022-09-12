@@ -1,11 +1,9 @@
 import type { NextPage } from "next";
 import { useState } from "react";
-import queue from "../pages/api/queue";
 
 export const getServerSideProps = async () => {
-  const result = await queue.enqueue({ method: "GET" });
   return {
-    props: { ...result },
+    props: {},
   };
 };
 const Spinner = () => (
@@ -23,7 +21,7 @@ const Home: NextPage = (props) => {
     setResult("");
     setIsLoading(true);
     try {
-      const r = await fetch("/api/enqueue");
+      const r = await fetch("/api/createCron");
       const data = await r.json();
       console.log(data);
       setResult(data);

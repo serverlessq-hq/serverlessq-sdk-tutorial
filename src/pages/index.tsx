@@ -1,68 +1,35 @@
 import type { NextPage } from "next";
-import { useState } from "react";
-import queue from "../pages/api/queue";
+import Link from "next/link";
+import { FC } from "react";
 
-export const getServerSideProps = async () => {
-  const result = await queue.enqueue({ method: "GET" });
-  return {
-    props: { ...result },
-  };
+const LinkComponent: FC<{ name: string }> = ({ name }) => {
+  return (
+    <Link href={`/${name.toLowerCase()}`}>
+      <div className="text-xl border rounded-xl p-4 border-neutral-700 hover:shadow-lg disabled:text-7xl w-48 text-center cursor-pointer">
+        <a>{name}</a>
+      </div>
+    </Link>
+  );
 };
-const Spinner = () => (
-  <div className="flex items-center justify-center space-x-2 animate-bounce">
-    <div className="w-8 h-8 bg-blue-400 rounded-full"></div>
-    <div className="w-8 h-8 bg-green-400 rounded-full"></div>
-    <div className="w-8 h-8 bg-black rounded-full"></div>
-  </div>
-);
-const Home: NextPage = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState<any>();
-
-  const doSomething = async () => {
-    setResult("");
-    setIsLoading(true);
-    try {
-      const r = await fetch("/api/enqueue");
-      const data = await r.json();
-      console.log(data);
-      setResult(data);
-    } catch (e: any) {
-      console.log(e);
-      setResult(JSON.stringify(e));
-    }
-    setIsLoading(false);
-  };
-
+const Home: NextPage = () => {
   return (
     <>
-      <div className="flex justify-center items-center h-screen">
-        <div className="flex flex-col items-center gap-5">
-          <div className="mb-20">
-            <p className="font-bold">
-              SSR Result:{" "}
-              <span className="font-normal">{JSON.stringify(props)}</span>
-            </p>
-          </div>
-
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <button
-              disabled={isLoading}
-              onClick={doSomething}
-              className="text-xl border rounded-xl p-4 border-neutral-700 hover:shadow-lg disabled:text-7xl w-45"
-            >
-              Execute Task (CSR)
-            </button>
-          )}
-          <div>
-            <p className="font-bold">
-              Client Side Fetch Result:{" "}
-              <span className="font-normal">{JSON.stringify(result)}</span>
-            </p>
-          </div>
+      <div className="flex flex-col justify-center items-center h-screen gap-10">
+        <h1 className="text-4xl">ServerlessQ SDK Example</h1>
+        <div className="flex items-center gap-5">
+          <LinkComponent name="Queue" />
+          <LinkComponent name="Cron" />
         </div>
+        <p>
+          Go check out the docs at{" "}
+          <a
+            className="text-blue-700 hover:underline"
+            href="https://docs.serverlessq.com/"
+            target={"_blank"}
+          >
+            https://docs.serverlessq.com/
+          </a>
+        </p>
       </div>
     </>
   );

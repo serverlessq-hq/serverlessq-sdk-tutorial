@@ -4,7 +4,7 @@ export default Cron(
   "testCron",
   "api/cron",
   async (req, res) => {
-    console.log(req);
+    // business logic executed after cron is triggered
     return;
   },
   {

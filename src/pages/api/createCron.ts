@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import cronjob from "./cron";
 
-export default async function enqueue(
+export default async function createCron(
   _req: NextApiRequest,
   res: NextApiResponse
 ) {

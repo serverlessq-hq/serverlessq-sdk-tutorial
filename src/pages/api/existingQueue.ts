@@ -9,7 +9,7 @@ export default async function handler(
     const result = await enqueue({
       target: "https://mock.codes/200",
       method: "GET",
-      queueId: "da60c1ce-037f-4341-a3eb-e204a62a1f00",
+      queueId: "",
     });
     res.json({ status: "success", ...result });
   } catch (e) {

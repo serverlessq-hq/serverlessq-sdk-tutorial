@@ -6,11 +6,12 @@ const doSomethingImportant = async () => {
 };
 
 // your deployed vercel or ngrok forwared url @see: https://docs.serverlessq.com/tutorial/ngrokLocalDevelopment
-const TARGET = "";
+const TARGET = "<your-ngrok-url>/api/queue";
+
 
 // pages/api/queue
 export default Queue(
-  "vercel2",
+  "vercel5",
   "api/queue",
   async (req, res) => {
     if (!verifySignature(req, JSON.stringify({ target: TARGET }))) {

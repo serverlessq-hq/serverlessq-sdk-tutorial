@@ -1,10 +1,11 @@
+const { withServerlessQ } = require("@serverlessq/nextjs");
 /**
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
   env: {
-    title: "hello"
-  }
-}
+    title: "hello",
+  },
+};
 
-module.exports = nextConfig
+module.exports = withServerlessQ(nextConfig);

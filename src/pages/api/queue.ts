@@ -1,30 +1,15 @@
 import { Queue } from "@serverlessq/nextjs";
-import { verifySignature } from "utils/verifySignature";
+import { NextApiRequest, NextApiResponse } from "next";
 
-const doSomethingImportant = async () => {
-  return await (await fetch("https://mock.codes/200")).json();
-};
+async function handler(req: NextApiRequest, res: NextApiResponse) {
+  console.log("MESSAGE HERE")
+  console.log("Message arrived!", req.body);
+  return res.status(200).json({ status: "Image transformed ✅ - 500 KB " });
+}
 
-// your deployed vercel or ngrok forwared url @see: https://docs.serverlessq.com/tutorial/ngrokLocalDevelopment
-const TARGET = "";
-
-// pages/api/queue
-export default Queue(
-  "vercel2",
-  "api/queue",
-  async (req, res) => {
-    if (!verifySignature(req, JSON.stringify({ target: TARGET }))) {
-      res.status(403).json({
-        code: `invalid_signature`,
-        error: `signature didn't match`,
-      });
-      return;
-    }
-    await doSomethingImportant();
-    res.send("finished");
+export default Queue({
+  handler,
+  options: {
+    route: "/api/queue",
   },
-  {
-    retries: 1,
-    urlToOverrideWhenRunningLocalhost: TARGET,
-  }
-);
+});
